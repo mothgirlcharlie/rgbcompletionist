@@ -19,15 +19,22 @@ def generate_file():
         outfile.write(data)
 
 if __name__ == '__main__':
+    genfile = False
+
+    getinput = input("Generate file? Y/N\n")
+    if(getinput.lower == "y"):
+        genfile = True
+
+    imagename = input("Image file name: ")
+
     outset = set()
-    pic = Image.open("input.png")
+    pic = Image.open(imagename)
 
     for xpixel in range(pic.size[0]):
         for ypixel in range(pic.size[1]):
             outset.add(pixeltohexvalue( pic.getpixel( (xpixel,ypixel) )))
-
-    # generate_file()
+    if(genfile):
+        generate_file()
 
     print(f"image size: {pic.size[0]}x{pic.size[1]} ({pic.size[0] * pic.size[1]:,d} total pixels.)")
     print(f"{len(outset):,d} / {255**3:,d} rgb values")
-
